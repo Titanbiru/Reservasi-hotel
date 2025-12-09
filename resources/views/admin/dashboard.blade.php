@@ -64,7 +64,7 @@
                 <div class="col-md-4 mb-3">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <h5>Jumlah User Admin/Resepsionis hotel</h5>
+                            <h5>Jumlah User</h5>
                             <h2 class="text-warning">{{$totalUsers}}</h2>
                         </div>
                     </div>

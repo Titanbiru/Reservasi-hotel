@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
 
     <h2 class="mb-3">Manajemen Tipe Kamar</h2>
 
@@ -41,7 +41,7 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Kembali</a>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary ">Kembali</a>
 
 </div>
 @endsection

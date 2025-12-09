@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h3>Edit Tamu</h3>
 
     <form action="{{ route('resepsionis.guests.update',$guest->id) }}" method="POST">

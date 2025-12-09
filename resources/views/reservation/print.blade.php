@@ -28,7 +28,7 @@
     }
 </style>
 
-<div class="print-container">
+<div class="print-container mt-3">
 
     <h2 class="text-center mb-4">Bukti Reservasi Hotel</h2>
 
@@ -46,8 +46,13 @@
     <!-- <div class="text-center mb-3 back-btn">
         </div> -->
     <div class="text-center print-btn mt-4">
-        <a href="{{ url()->previous() }}" class="btn btn-secondary">← Kembali</a>
-        <button onclick="window.print()" class="btn btn-primary">Cetak Bukti Reservasi</button>
+        <a href="{{ route('reservation.create',$reservation->room_type_id) }}" class="btn btn-secondary">← Kembali</a>
+        
+        <a href="{{ route('reservation.pdf', $reservation->reservation_code) }}" 
+            class="btn btn-success">
+            Download PDF
+        </a>
+        <a href="{{ route('reservation.history') }}" class="btn btn-primary">History Reservasi</a>
     </div>
 
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <h2>Edit Fasilitas</h2>
 
     <form action="{{ route('admin.facilities.update',$facility->id) }}" method="POST" enctype="multipart/form-data">
@@ -16,6 +16,14 @@
         <div class="mb-3">
             <label>Deskripsi</label>
             <textarea name="description" class="form-control">{{ $facility->description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Jenis Fasilitas</label>
+            <select name="type" class="form-control">
+                <option value="hotel" {{ $facility->type == 'hotel' ? 'selected' : '' }}>Fasilitas Hotel</option>
+                <option value="room" {{ $facility->type == 'room' ? 'selected' : '' }}>Fasilitas Kamar</option>
+            </select>
         </div>
 
         <div class="mb-3">

@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <h2 class="mb-4">Daftar Tamu (Guest)</h2>
 

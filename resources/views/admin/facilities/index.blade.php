@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <h2>Data Fasilitas Hotel</h2>
     <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary mb-3">Tambah Fasilitas</a>
     <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Kembali</a>

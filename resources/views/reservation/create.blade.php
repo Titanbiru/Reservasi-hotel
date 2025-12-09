@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <h1 class="mb-4">Reservasi: {{ $room_type->name }}</h1>
 
@@ -41,8 +50,8 @@
         </div>
         
         <div class="mb-3">
-            <a href="{{ route('home') }}" class="btn btn-secondary">← Kembali</a>
             <button class="btn btn-primary">Konfirmasi Pesanan</button>
+            <a href="{{ route('home') }}" class="btn btn-secondary">← Kembali</a>
         </div>
 
     </form>

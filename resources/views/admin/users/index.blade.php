@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
 
     <h3>Manajemen User</h3>
     <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Tambah User</a>

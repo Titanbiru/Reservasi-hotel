@@ -72,11 +72,11 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main >
             @yield('content')
         </main>
         
-        <footer class="bg-dark text-white py-4">
+        <footer class="bg-dark text-white py-4 mt-3">
             <div class="container">
 
                 <div class="row">

@@ -15,12 +15,23 @@ use App\Http\Controllers\Resepsionis\GuestController;
 // Guest routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/room-types/{id}', [HomeController::class, 'roomTypeDetail'])->name('room-type.detail');
-Route::get('/reserve/{room_type}', [ReservationController::class, 'create'])->name('reservation.create');
-Route::post('/reserve', [ReservationController::class, 'store'])->name('reservation.store');
-Route::get('/reservation/print/{code}', [ReservationController::class, 'print'])->name('reservation.print');
+Route::middleware('auth')->group(function () {
+    Route::get('/reserve/{room_type}', [ReservationController::class, 'create'])
+        ->name('reservation.create');
 
+    Route::post('/reserve', [ReservationController::class, 'store'])
+        ->middleware('auth')
+        ->name('reservation.store');
+        
+    Route::get('/my-reservations', [ReservationController::class, 'myReservations'])
+        ->name('reservation.history');
+
+    Route::get('/reservation/print/{code}', [ReservationController::class, 'print'])->name('reservation.print');
+    
+    Route::get('/reservation/pdf/{code}', [ReservationController::class, 'pdf'])->name('reservation.pdf');
+});
 // Auth routes
-Auth::routes(); // cukup sekali
+Auth::routes();
 
 // Admin routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

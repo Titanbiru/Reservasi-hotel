@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <h2>Edit Kamar</h2>
 
     <form action="{{ route('admin.rooms.update',$room->id) }}" method="POST">
@@ -20,14 +20,14 @@
 
         <div class="mb-3">
             <label>Nomor Kamar</label>
-            <input type="text" name="room_number" value="{{ $room->number }}" class="form-control">
+            <input type="text" name="number" value="{{ $room->number }}" class="form-control">
         </div>
 
         <div class="mb-3">
             <label>Status</label>
             <select name="status" class="form-control">
                 <option value="available" {{ $room->status=='available'?'selected':'' }}>Available</option>
-                <option value="booked" {{ $room->status=='booked'?'selected':'' }}>Booked</option>
+                <option value="occupied" {{ $room->status=='occupied'?'selected':'' }}>Occupied</option>
                 <option value="maintenance" {{ $room->status=='maintenance'?'selected':'' }}>Maintenance</option>
             </select>
         </div>

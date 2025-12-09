@@ -61,7 +61,9 @@ class RoomTypeController extends Controller
         $data = $request->only('name','description','price','capacity');
 
         if ($request->hasFile('image')) {
-            if ($roomType->image) Storage::disk('public')->delete($roomType->image);
+            if ($roomType->image) {
+                Storage::disk('public')->delete($roomType->image);
+            }
             $data['image'] = $request->file('image')->store('room_types','public');
         }
 

@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -70,8 +70,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function store(){
-        return redirect()->route('login')->with('Succes','Registrasi berhasil, silahkan login.');
+    protected function registered($request, $user){
+        auth()->logout();
+
+        return redirect()->route('login')->with('succes', 'Registrasi telah berhasil. Silahkan login.');
     }
 
 }

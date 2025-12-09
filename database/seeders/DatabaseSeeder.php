@@ -33,12 +33,12 @@ class DatabaseSeeder extends Seeder
 
         // Facilities: hotel + room
         // Bisa 6 fasilitas acak
-        Facility::factory()->count(6)->create();
+        Facility::factory()->count(10)->create();
 
         // RoomTypes + Rooms
         // Misal 3 tipe kamar
         RoomType::factory()
-            ->count(3)
+            ->count(5)
             ->create()
             ->each(function ($roomType) {
                 // Setiap tipe kamar punya 3-5 kamar

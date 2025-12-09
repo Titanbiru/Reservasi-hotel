@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <h3>List Kamar Hotel</h3>
 
     <table class="table table-bordered table-striped mt-3">

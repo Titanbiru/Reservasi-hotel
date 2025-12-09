@@ -15,6 +15,9 @@
             <a href="{{ route('reservation.create', $roomTypes->first()->id ?? 1) }}" class="btn btn-warning fw-bold px-4 mt-3">
                 Pesan Sekarang
             </a>
+            <a href="{{ route('reservation.history') }}" class="btn btn-outline-dark fw-bold px-4 mt-3">
+                Lihat Reservasi Saya
+            </a>
         @endguest
     </div>
 

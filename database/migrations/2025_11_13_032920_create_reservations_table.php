@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // guest login
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');// guest login
             $table->string('guest_name');
             $table->string('guest_email');
             $table->string('guest_phone')->nullable();

@@ -32,11 +32,15 @@ class RoomController extends Controller
     {
         $request->validate([
             'room_type_id' => 'required',
-            'room_number' => 'required|unique:rooms',
+            'number' => 'required|unique:rooms,number',
             'status' => 'required'
         ]);
 
-        Room::create($request->all());
+        Room::create([
+            'room_type_id' => $request->room_type_id,
+            'number' => $request->number,
+            'status' => $request->status,
+        ]);
 
         return redirect()->route('admin.rooms.index')->with('success','Room berhasil ditambahkan');
     }
@@ -50,19 +54,17 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         $request->validate([
+            'room_type_id' => 'required',
             'number' => 'required|unique:rooms,number,'.$room->id,
-            'room_types_id' => 'required',
             'status' => 'required'
         ]);
 
         $room->update([
-            'number' => $request->number,
             'room_type_id' => $request->room_type_id,
+            'number' => $request->number,
             'status' => $request->status,
         ]); 
-
-        $room->update($request->all());
-
+        
         return redirect()->route('admin.rooms.index')->with('success','Room berhasil diupdate');
     }
 

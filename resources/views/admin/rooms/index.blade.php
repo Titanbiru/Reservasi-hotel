@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <h2 class="mb-3">Data Kamar Hotel</h2>
     
     <form method="GET" action="{{ route('admin.rooms.index') }}" class="mb-3 d-flex align-items-center">
