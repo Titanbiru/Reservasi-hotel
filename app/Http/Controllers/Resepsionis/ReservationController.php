@@ -36,4 +36,47 @@ class ReservationController extends Controller
         $reservation = Reservation::with('roomType')->findOrFail($id);
         return view('resepsionis.reservations.show', compact('reservation'));
     }
+    // Proses check-in
+    public function confirm($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        if ($reservation->status !== 'pending') {
+            return back()->with('error', 'Reservasi tidak dapat dikonfirmasi.');
+        }
+
+        $reservation->status = 'confirmed';
+        $reservation->save();
+
+        return back()->with('success', 'Reservasi telah dikonfirmasi.');
+    }
+
+    public function checkIn($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        if ($reservation->status !== 'confirmed') {
+            return back()->with('error', 'Tamu belum dikonfirmasi.');
+        }
+
+        $reservation->status = 'checked_in';
+        $reservation->save();
+
+        return back()->with('success', 'Tamu berhasil check-in.');
+    }
+
+    public function checkOut($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        if ($reservation->status !== 'checked_in') {
+            return back()->with('error', 'Tamu belum check-in.');
+        }
+
+        $reservation->status = 'check_out';
+        $reservation->save();
+
+        return back()->with('success', 'Tamu berhasil check-out.');
+    }
+
 }

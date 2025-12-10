@@ -16,20 +16,13 @@ use App\Http\Controllers\Resepsionis\GuestController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/room-types/{id}', [HomeController::class, 'roomTypeDetail'])->name('room-type.detail');
 Route::middleware('auth')->group(function () {
-    Route::get('/reserve/{room_type}', [ReservationController::class, 'create'])
-        ->name('reservation.create');
-
-    Route::post('/reserve', [ReservationController::class, 'store'])
-        ->middleware('auth')
-        ->name('reservation.store');
-        
-    Route::get('/my-reservations', [ReservationController::class, 'myReservations'])
-        ->name('reservation.history');
-
+    Route::get('/reserve/{room_type}', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::post('/reserve', [ReservationController::class, 'store'])->middleware('auth')->name('reservation.store');
+    Route::get('/my-reservations', [ReservationController::class, 'myReservations'])->name('reservation.history');
     Route::get('/reservation/print/{code}', [ReservationController::class, 'print'])->name('reservation.print');
-    
     Route::get('/reservation/pdf/{code}', [ReservationController::class, 'pdf'])->name('reservation.pdf');
 });
+
 // Auth routes
 Auth::routes();
 
@@ -49,6 +42,10 @@ Route::middleware(['auth', 'role:resepsionis'])->prefix('resepsionis')->name('re
     Route::get('/reservations/{id}', [ResepsionisReservationController::class, 'show'])->name('reservations.show');
     Route::resource('guests', GuestController::class);
     Route::resource('rooms', RoomsController::class)->only(['index', 'show']);
+    Route::patch('/reservation/{id}/confirm', [ResepsionisReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::patch('/reservation/{id}/check-in', [ResepsionisReservationController::class, 'checkIn'])->name('reservations.checkin');
+    Route::patch('/reservation/{id}/check-out', [ResepsionisReservationController::class, 'checkOut'])->name('reservations.checkout');
+
 });
 
 // Fallback

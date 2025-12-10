@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('check_out');
             $table->integer('room_count')->default(1);
             $table->decimal('total_price', 12, 2);
-            $table->enum('status', ['pending','confirmed','checked_in','cancelled'])->default('pending');
+            $table->enum('status', ['pending','confirmed','checked_in','check_out','cancelled',])->default('pending');
             $table->string('reservation_code')->unique();
             $table->timestamps();
         });

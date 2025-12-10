@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\RoomType;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\User;
 
 class ReservationFactory extends Factory
 {
@@ -14,12 +15,15 @@ class ReservationFactory extends Factory
 
     public function definition()
     {
+        $userIds = User::pluck('id')->toArray();
+
         $check_in = $this->faker->dateTimeBetween('now', '+1 month');
         $check_out = (clone $check_in)->modify('+'.rand(1,5).' days');
 
         $roomType = RoomType::inRandomOrder()->first();
 
         return [
+            'user_id' => $this->faker->randomElement($userIds),
             'guest_name' => $this->faker->name(),
             'guest_email' => $this->faker->safeEmail(),
             'guest_phone' => $this->faker->phoneNumber(),

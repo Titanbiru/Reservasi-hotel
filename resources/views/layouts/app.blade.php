@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="text-center text-muted pt-3 border-top mt-3 color-white">
-                    <p style=color:white;>© {{ date('Y') }} Sistem Pemesanan Hotel — All Rights Reserved.</p>
+                    <p style=color:white;>© {{ date('Y') }} Sistem Pemesanan Hotel — Tristan Prayogo All Rights Reserved.</p>
                 </div>
 
             </div>
