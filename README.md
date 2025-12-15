@@ -1,122 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
 # 🏨 Hotel Management & Reservation System
 
-[![Laravel Version](img.shields.io)](https://laravel.com)
-[![PHP Version](img.shields.io)](https://php.net)
-[![License](img.shields.io)](opensource.org)
+![Laravel](https://img.shields.io/badge/Laravel-11.x-red)
+![PHP](https://img.shields.io/badge/PHP-8.2+-blue)
+![Database](https://img.shields.io/badge/Database-MySQL-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Development-yellow)
 
-Sistem Informasi Manajemen Hotel berbasis web yang dirancang untuk memudahkan proses reservasi kamar, pengelolaan tipe kamar, dan manajemen tamu secara efisien.
+Sistem Informasi Manajemen Hotel berbasis web yang dirancang untuk mengelola reservasi kamar, data tamu, fasilitas hotel, serta operasional resepsionis secara terstruktur dan efisien.
+
+Project ini dibuat menggunakan **Laravel** dengan sistem autentikasi multi-role dan alur reservasi yang menyerupai proses nyata di hotel.
 
 ---
 
 ## 🚀 Fitur Utama
 
-- **Sistem Autentikasi**: Login Multi-level (Admin, Resepsionis, & Guest).
-- **Manajemen Kamar**: Pengelolaan Tipe Kamar (Room Type), harga, dan fasilitas yang tersedia.
-- **Reservasi Real-time**: Pencatatan data tamu, durasi menginap, dan kalkulasi otomatis harga total.
-- **Kode Reservasi Unik**: Generate otomatis kode booking (e.g., `TH0GQO`).
-- **Sistem Seeding Otomatis**: Kemampuan mengisi data dummy untuk pengujian performa.
-- **Penyimpanan File**: Manajemen upload gambar fasilitas dan kamar menggunakan Storage Link.
+- **Autentikasi Multi-Role**
+  - Admin
+  - Resepsionis
+  - Guest (Tamu)
+
+- **Manajemen Kamar**
+  - CRUD tipe kamar
+  - Pengaturan harga per malam
+  - Upload gambar kamar
+
+- **Manajemen Fasilitas Hotel**
+  - CRUD fasilitas
+  - Upload gambar fasilitas
+  - Dukungan lebih dari 10 fasilitas
+
+- **Manajemen Banner**
+  - Upload banner carousel oleh Admin
+  - Aktif / nonaktif banner
+  - Tanpa judul dan subjudul (opsional)
+  - Penghapusan banner dari dashboard admin
+
+- **Sistem Reservasi**
+  - Pemesanan kamar oleh Guest
+  - Generate kode reservasi otomatis
+  - Perhitungan total harga otomatis
+
+- **Status Reservasi Bertahap**
+  - `pending`
+  - `confirmed`
+  - `checked_in`
+  - `check_out`
+  - `cancelled`
+
+- **Konfirmasi Resepsionis**
+  - Check-in dan check-out dilakukan melalui resepsionis
+  - Menyerupai proses nyata di hotel
+
+- **File Storage**
+  - Upload gambar menggunakan Laravel Storage
+  - Public storage dengan `storage:link`
+
+- **Database Seeding**
+  - Dummy data untuk user, kamar, fasilitas, dan reservasi
 
 ---
 
-## 🛠️ Stack Teknologi
+
+
+## 🛠️ Teknologi yang Digunakan
 
 - **Backend**: Laravel 11.x
+- **Bahasa**: PHP 8.2+
 - **Database**: MySQL / MariaDB
-- **Data Faker**: FakerPHP (untuk simulasi data)
-- **Library**: Carbon (manajemen waktu), Illuminate Support
+- **Frontend**: Blade Template
+- **Library Pendukung**:
+  - Carbon (manajemen tanggal)
+  - FakerPHP (dummy data)
 
 ---
 
-## 📋 Prasyarat Instalasi
+## 📋 Prasyarat Sistem
+
+Pastikan environment Anda memenuhi syarat berikut:
 
 - PHP >= 8.2
 - Composer 2.x
 - MySQL / MariaDB
-- Web Server (Apache/Nginx) atau Artisan Serve
+- Apache / Nginx atau Laravel Artisan Serve
 
 ---
 
-## ⚙️ Langkah Instalasi
+## ⚙️ Instalasi & Setup
 
-### 1. Persiapan Awal
-Clone proyek dan masuk ke folder direktori:
+### 1. Clone Repository
 ```bash
-git clone github.com
+git clone https://github.com/username/hotel-reservation.git
 cd hotel-reservation
 ```
-### Environment Setup
-Salin .env.example ke .env, atur database Anda, lalu:
-```bash
+
+### 2. Install Dependency
+``` bash
+composer install
+```
+### 3. Konfigurasi Environment
+``` bash
+cp .env.example .env
 php artisan key:generate
 ```
+Atur konfigurasi database di file .env.
 
-### Database & Storage
-```bash
+### 4. Migrasi & Seeder Database
+``` bash
 php artisan migrate:fresh --seed
+```
+
+### 5. Storage Link
+``` bash
 php artisan storage:link
 ```
 
-### Akun Default 
-Admin: admin@hotel.com | Password: 12345678
-Admin: resepsionis@hotel.com | Password: 12345678
+### 6. Jalankan Aplikasi
+``` bash
+php artisan serve
+```
+Akses aplikasi melalui:
+``` bash
+http://127.0.0.1:8000
+```
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🔐 Akun Default
+| Role        | Email | Password |
+|------------|------------|------------|
+| Admin       | admin@hotel.com |12345678|
+| Resepsionis | resepsionis@hotel.com |12345678|
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📂 Struktur Role
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Role        | Akses Utama |
+|------------|------------|
+| Admin       | Manajemen kamar, Manajemen fasilitas, Manajemen banner, Manajemen user |
+| Resepsionis | Konfirmasi reservasi, Proses check-in & check-out |
+| Guest       | Reservasi, Melihat history reservasi, Melihat kamar |
