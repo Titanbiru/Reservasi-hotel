@@ -1,6 +1,6 @@
 # 🏨 Hotel Management & Reservation System
 
-![Laravel](https://img.shields.io/badge/Laravel-11.x-red)
+![Laravel](https://img.shields.io/badge/Laravel-12.x-red)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-blue)
 ![Database](https://img.shields.io/badge/Database-MySQL-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -61,16 +61,18 @@ Project ini dibuat menggunakan **Laravel** dengan sistem autentikasi multi-role 
 ---
 
 
-
 ## 🛠️ Teknologi yang Digunakan
 
-- **Backend**: Laravel 11.x
+- **Backend**: Laravel 12.37.00
 - **Bahasa**: PHP 8.2+
 - **Database**: MySQL / MariaDB
 - **Frontend**: Blade Template
+- **Server Lingkungan Lokal (Opsional)**: Laragon / XAMPP / WAMP
+- **Frontend Styling**: Bootstrap 5.3+ (melalui Vite)
 - **Library Pendukung**:
   - Carbon (manajemen tanggal)
   - FakerPHP (dummy data)
+  - Composer (manajemen dependensi php)
 
 ---
 
@@ -79,7 +81,7 @@ Project ini dibuat menggunakan **Laravel** dengan sistem autentikasi multi-role 
 Pastikan environment Anda memenuhi syarat berikut:
 
 - PHP >= 8.2
-- Composer 2.x
+- Composer 2.8.10
 - MySQL / MariaDB
 - Apache / Nginx atau Laravel Artisan Serve
 
@@ -140,3 +142,12 @@ http://127.0.0.1:8000
 | Admin       | Manajemen kamar, Manajemen fasilitas, Manajemen banner, Manajemen user |
 | Resepsionis | Konfirmasi reservasi, Proses check-in & check-out |
 | Guest       | Reservasi, Melihat history reservasi, Melihat kamar |
+
+## 📄 License
+
+Project ini menggunakan lisensi MIT.
+
+## ℹ️ Tentang Laravel
+
+Laravel adalah framework PHP dengan sintaks elegan dan fitur lengkap untuk membangun aplikasi web modern.
+Dokumentasi resmi: https://laravel.com/docs
