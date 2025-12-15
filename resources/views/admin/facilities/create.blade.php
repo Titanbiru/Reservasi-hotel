@@ -27,7 +27,7 @@
 
         <div class="mb-3">
             <label>Gambar (opsional)</label>
-            <input type="file" name="image" class="form-control">
+            <input type="file" name="image" class="form-control" accept="image/*">
         </div>
 
         <button class="btn btn-success">Simpan</button>

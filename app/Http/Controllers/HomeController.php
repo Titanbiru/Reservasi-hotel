@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RoomType;
 use App\Models\Facility;
+use App\Models\Banner;
 
 
 class HomeController extends Controller
@@ -14,8 +15,9 @@ class HomeController extends Controller
     {
         $roomTypes = RoomType::with('facilities')->get();
         $hotelFacilities = Facility::where('type', 'hotel')->get();
+        $banners = Banner::where('is_active', true)->latest()->get();
 
-        return view('home', compact('roomTypes', 'hotelFacilities'));
+        return view('home', compact('roomTypes', 'hotelFacilities', 'banners'));
     }
 
     // Detail tipe kamar

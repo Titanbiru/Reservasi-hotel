@@ -11,6 +11,7 @@ use App\Http\Controllers\Resepsionis\ReservationController as ResepsionisReserva
 use App\Http\Controllers\Resepsionis\DashboardController as ResepsionisDashboardController;
 use App\Http\Controllers\Resepsionis\RoomsController;
 use App\Http\Controllers\Resepsionis\GuestController;
+use App\Http\Controllers\Admin\BannerController;
 
 // Guest routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('facilities', FacilityController::class);
     Route::resource('rooms', RoomController::class);
     Route::resource('users', UserController::class);
+    Route::resource('banners', BannerController::class)->except(['show','edit','update']);
+    Route::patch('banners/{id}/toggle', [BannerController::class, 'toggle'])->name('banners.toggle');
 });
 
 // Resepsionis routes

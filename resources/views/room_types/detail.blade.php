@@ -6,7 +6,9 @@
     <h1>{{ $roomType->name }}</h1>
 
     @if($roomType->image)
-        <img src="{{ asset('storage/' . $roomType->image) }}" class="img-fluid mb-3" width="400">
+        <img src="{{ asset('storage/'.$roomType->image) }}"
+            class="img-fluid rounded shadow mb-3"
+            style="max-width: 450px;">
     @endif
 
     <p>{{ $roomType->description }}</p>

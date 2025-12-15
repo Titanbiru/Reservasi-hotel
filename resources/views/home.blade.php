@@ -4,22 +4,50 @@
 <div class="container">
 
     <!-- Hero Banner -->
-    <div class="p-5 mb-5 rounded shadow-sm hero-section"
-        style="background: url('{{ asset('images/hotel-banner.jpg') }}') center/cover no-repeat;">
-        <h1 class="fw-bold display-5">Selamat Datang di Hotel Hebat</h1>
-        <p class="lead">Pengalaman menginap nyaman, fasilitas lengkap, dan pelayanan terbaik</p>
+    @if($banners->count())
+    <div id="hotelCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="5000">
 
-        @guest
-            <a href="{{ route('login') }}" class="btn btn-light fw-bold px-4 mt-3">Login untuk Reservasi</a>
-        @else
-            <a href="{{ route('reservation.create', $roomTypes->first()->id ?? 1) }}" class="btn btn-warning fw-bold px-4 mt-3">
-                Pesan Sekarang
-            </a>
-            <a href="{{ route('reservation.history') }}" class="btn btn-outline-dark fw-bold px-4 mt-3">
-                Lihat Reservasi Saya
-            </a>
-        @endguest
+        <div class="carousel-inner">
+            @foreach($banners as $index => $banner)
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                <div class="hero-section"
+                    style="background: url('{{ asset('storage/'.$banner->image) }}') center/cover no-repeat;">
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="carousel-caption d-none d-md-block">
+            @if($banner->title || $banner->subtitle)
+                @if($banner->title)
+                    <h2>{{ $banner->title }}</h2>
+                @endif
+
+                @if($banner->subtitle)
+                    <p>{{ $banner->subtitle }}</p>
+                @endif
+            @endif
+            @guest
+                <a href="{{ route('login') }}" class="btn btn-light fw-bold px-4 mt-3">Login untuk Reservasi</a>
+            @else
+                <a href="{{ route('reservation.create', $roomTypes->first()->id ?? 1) }}" class="btn btn-warning fw-bold px-4 mt-3">
+                    Pesan Sekarang
+                </a>
+                <a href="{{ route('reservation.history') }}" class="btn btn-outline-info fw-bold px-4 mt-3">
+                    Lihat Reservasi Saya
+                </a>
+            @endguest
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
+    @endif
+
 
 
     <!-- Tipe Kamar -->
@@ -57,15 +85,30 @@
     <h2 class="mt-5 fw-bold">Fasilitas Hotel</h2>
     <div class="row mt-3">
         @forelse ($hotelFacilities as $f)
-            <div class="col-md-3 col-6 mb-3">
-                <div class="p-3 text-center rounded shadow-sm border facility-box">
-                    <span class="fw-semibold">{{ $f->name }}</span>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="card h-100 shadow-sm border-0 facility-card">
+
+                    <img
+                        src="{{ $f->image
+                            ? asset('storage/'.$f->image)
+                            : asset('images/default-facility.jpg') }}"
+                        class="card-img-top facility-image"
+                        alt="{{ $f->name }}">
+
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-1">{{ $f->name }}</h6>
+                        <p class="text-muted small">
+                            {{ Str::limit($f->description, 60) }}
+                        </p>
+                    </div>
+
                 </div>
             </div>
         @empty
-            <p class="text-muted">Belum ada fasilitas hotel terdaftar.</p>
+            <p class="text-muted">Belum ada fasilitas hotel.</p>
         @endforelse
     </div>
+
 
 </div>
 
@@ -74,10 +117,21 @@
         min-height: 280px; 
         display:flex; 
         flex-direction:column; 
+    }
+    
+    .carousel-caption {
+        bottom: 20%;
         align-items:center; 
         justify-content:center;
-        color: black;
-        text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+        color: white;
+        font-weight: bold;
+        text-shadow: 2px 4px 4px rgba(0,0,0,0.7);
+    }
+    
+    .carousel-caption h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-shadow: 2px 4px 4px rgba(0,0,0,0.7);
     }
 
     .room-card { transition: .25s; border-radius: 10px; overflow:hidden; }
@@ -86,5 +140,21 @@
 
     .facility-box { background:#f8f9fa; transition:.25s; }
     .facility-box:hover { background:#e9ecef; transform:scale(1.05); }
+    .facility-card {
+        transition: .25s;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .facility-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    }
+
+    .facility-image {
+        height: 140px;
+        object-fit: cover;
+    }
+
 </style>
 @endsection

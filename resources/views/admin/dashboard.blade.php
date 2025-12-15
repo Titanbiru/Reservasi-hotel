@@ -25,6 +25,9 @@
                 <li class="nav-item mb-2">
                     <a href="{{ route('admin.users.index') }}" class="nav-link text-white">Kelola Pengguna</a>
                 </li>
+                <li class="nav-item mb-2">
+                    <a href="{{ route('admin.banners.index') }}" class="nav-link text-white">Pengaturan Banner</a>
+                </li>
             </ul>
 
             <hr>

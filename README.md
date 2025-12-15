@@ -7,6 +7,69 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# 🏨 Hotel Management & Reservation System
+
+[![Laravel Version](img.shields.io)](https://laravel.com)
+[![PHP Version](img.shields.io)](https://php.net)
+[![License](img.shields.io)](opensource.org)
+
+Sistem Informasi Manajemen Hotel berbasis web yang dirancang untuk memudahkan proses reservasi kamar, pengelolaan tipe kamar, dan manajemen tamu secara efisien.
+
+---
+
+## 🚀 Fitur Utama
+
+- **Sistem Autentikasi**: Login Multi-level (Admin, Resepsionis, & Guest).
+- **Manajemen Kamar**: Pengelolaan Tipe Kamar (Room Type), harga, dan fasilitas yang tersedia.
+- **Reservasi Real-time**: Pencatatan data tamu, durasi menginap, dan kalkulasi otomatis harga total.
+- **Kode Reservasi Unik**: Generate otomatis kode booking (e.g., `TH0GQO`).
+- **Sistem Seeding Otomatis**: Kemampuan mengisi data dummy untuk pengujian performa.
+- **Penyimpanan File**: Manajemen upload gambar fasilitas dan kamar menggunakan Storage Link.
+
+---
+
+## 🛠️ Stack Teknologi
+
+- **Backend**: Laravel 11.x
+- **Database**: MySQL / MariaDB
+- **Data Faker**: FakerPHP (untuk simulasi data)
+- **Library**: Carbon (manajemen waktu), Illuminate Support
+
+---
+
+## 📋 Prasyarat Instalasi
+
+- PHP >= 8.2
+- Composer 2.x
+- MySQL / MariaDB
+- Web Server (Apache/Nginx) atau Artisan Serve
+
+---
+
+## ⚙️ Langkah Instalasi
+
+### 1. Persiapan Awal
+Clone proyek dan masuk ke folder direktori:
+```bash
+git clone github.com
+cd hotel-reservation
+```
+### Environment Setup
+Salin .env.example ke .env, atur database Anda, lalu:
+```bash
+php artisan key:generate
+```
+
+### Database & Storage
+```bash
+php artisan migrate:fresh --seed
+php artisan storage:link
+```
+
+### Akun Default 
+Admin: admin@hotel.com | Password: 12345678
+Admin: resepsionis@hotel.com | Password: 12345678
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

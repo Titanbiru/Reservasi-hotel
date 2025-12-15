@@ -12,7 +12,9 @@ class Facility extends Model
     protected $fillable = [
         'name',
         'description',
-        'type' // 'room' atau 'hotel'
+        'type', // 'room' atau 'hotel'
+        'image',
+        'is_active'
     ];
 
     //Relasi ke RoomType lewat pivot

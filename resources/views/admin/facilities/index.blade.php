@@ -2,42 +2,70 @@
 
 @section('content')
 <div class="container mt-3">
-    <h2>Data Fasilitas Hotel</h2>
-    <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary mb-3">Tambah Fasilitas</a>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Kembali</a>
 
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Data Fasilitas</h2>
+        <div>
+            <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Kembali</a>
+        </div>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
             <tr>
                 <th>Nama</th>
+                <th>Jenis</th>
                 <th>Deskripsi</th>
                 <th>Gambar</th>
-                <th>Aksi</th>
+                <th width="160">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($facilities as $f)
+
+        @forelse($facilities as $f)
             <tr>
-                <td>{{ $f->name }}</td>
-                <td>{{ $f->description }}</td>
+                <td class="fw-semibold">{{ $f->name }}</td>
+
                 <td>
-                    @if($f->image)
-                        <img src="{{ asset('storage/'.$f->image)}}" width="80">
-                    @endif
+                    <span class="badge {{ $f->type === 'hotel' ? 'bg-info' : 'bg-warning' }}">
+                        {{ ucfirst($f->type) }}
+                    </span>
                 </td>
+
+                <td>{{ Str::limit($f->description, 60) }}</td>
+
                 <td>
-                    <a href="{{ route('admin.facilities.edit',$f->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('admin.facilities.destroy',$f->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('Hapus fasilitas?')" class="btn btn-danger btn-sm">Hapus</button>
+                    <img 
+                        src="{{ $f->image ? asset('storage/'.$f->image) : asset('images/no-image.png') }}"
+                        width="70"
+                        class="rounded border"
+                    >
+                </td>
+
+                <td>
+                    <a href="{{ route('admin.facilities.edit',$f->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+                    <form action="{{ route('admin.facilities.destroy',$f->id) }}" method="POST" class="d-inline">
+                        @csrf @method('DELETE')
+                        <button onclick="return confirm('Hapus fasilitas ini?')" class="btn btn-sm btn-danger">
+                            Hapus
+                        </button>
                     </form>
                 </td>
             </tr>
-            @endforeach
+        @empty
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    Belum ada fasilitas
+                </td>
+            </tr>
+        @endforelse
+
         </tbody>
     </table>
+
+    {{ $facilities->links() }}
 
 </div>
 @endsection
