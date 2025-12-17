@@ -5,14 +5,15 @@
 
     <h2 class="mb-3">Manajemen Tipe Kamar</h2>
 
-    <a href="{{ route('admin.room-types.create') }}" class="btn btn-success mb-3">
-        Tambah Tipe Kamar
-    </a>
-
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <div class="button-container mb-3 d-flex gap-2">
+        <a href="{{ route('admin.room-types.create') }}" class="btn btn-primary">Tambah Tipe Kamar</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary ">Kembali</a>
+    </div>
+    
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -54,7 +55,7 @@
                 
                 <td>
                     <a href="{{ route('admin.room-types.edit',$type->id) }}"
-                    class="btn btn-sm btn-warning mb-1">
+                    class="btn btn-sm btn-warning">
                         Edit
                     </a>
 
@@ -73,7 +74,6 @@
         </tbody>
 
     </table>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary ">Kembali</a>
 
 </div>
 @endsection

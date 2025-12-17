@@ -20,6 +20,15 @@ class RoomController extends Controller
         }
 
         return view('admin.rooms.index', compact('rooms',  'show'));
+
+        $rooms = Room::with(['roomType', 'reservation' => function ($q) {$q->where('status', 'checked_in');
+        }])
+        ->when($show !== 'all', function ($q) use ($show) {
+            $q->paginate($show);
+        }, function ($q) {
+            $q->get();
+        });
+
     }
 
     public function create()

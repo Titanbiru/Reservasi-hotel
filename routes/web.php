@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-reservations', [ReservationController::class, 'myReservations'])->name('reservation.history');
     Route::get('/reservation/print/{code}', [ReservationController::class, 'print'])->name('reservation.print');
     Route::get('/reservation/pdf/{code}', [ReservationController::class, 'pdf'])->name('reservation.pdf');
+    Route::patch('/reservation/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
+
 });
 
 // Auth routes

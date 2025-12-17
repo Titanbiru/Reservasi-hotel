@@ -12,6 +12,10 @@
         </select>
     </form>
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     <a href="{{ route('admin.rooms.create') }}" class="btn btn-primary mb-3">Tambah Kamar</a>
     <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Kembali</a>
 
@@ -32,7 +36,26 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $r->number }}</td>
                 <td>{{ $r->roomType->name }}</td>
-                <td>{{ $r->status }}</td>
+                <td>
+                    @php
+                        $badgeClass = match ($r->status) {
+                            'occupied'    => 'bg-danger',
+                            'maintenance' => 'bg-warning',
+                            'available'   => 'bg-success',
+                            default       => 'bg-secondary',
+                        };
+                    @endphp
+
+                    <span class="badge {{ $badgeClass }}">
+                        @if($r->status === 'occupied' && $r->reservation)
+                            Occupied by {{ $r->reservation->guest_name }}
+                        @else
+                            {{ ucfirst($r->status) }}
+                        @endif
+                    </span>
+                </td>
+
+
                 <td>
                     <a href="{{ route('admin.rooms.edit',$r->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('admin.rooms.destroy',$r->id) }}" method="POST" class="d-inline">

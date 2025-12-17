@@ -82,13 +82,13 @@
                 <div class="row">
 
                     <div class="col-md-4 mb-3">
-                        <h5 class="fw-bold">Hotel Hebat</h5>
-                        <p class="text-muted">Penginapan nyaman dengan fasilitas terbaik dan pelayanan profesional.</p>
+                        <h5 class="fw-bold">Hotel Evancio</h5>
+                        <p class="">Penginapan nyaman dengan fasilitas terbaik dan pelayanan profesional.</p>
                     </div>
 
                     <div class="col-md-4 mb-3">
                         <h5 class="fw-bold">Kontak</h5>
-                        <ul class="list-unstyled text-muted">
+                        <ul class="list-unstyled">
                             <li>Alamat: Jalan Mawar No. 12</li>
                             <li>Telp: 021-5678-1234</li>
                             <li>Email: info@hotelhebat.com</li>

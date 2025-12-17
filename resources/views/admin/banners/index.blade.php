@@ -5,9 +5,6 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Daftar Banner</h2>
-        <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">
-            + Tambah Banner
-        </a>
     </div>
 
     @if(session('success'))
@@ -16,7 +13,15 @@
         </div>
     @endif
 
-    <table class="table table-bordered align-middle">
+    <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">
+        Tambah Banner
+    </a>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
+        Kembali
+    </a>
+
+
+    <table class="table table-bordered align-middle mt-3">
         <thead>
             <tr>
                 <th width="120">Gambar</th>
@@ -74,10 +79,5 @@
             @endforelse
         </tbody>
     </table>
-
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
-        Kembali
-    </a>
-
 </div>
 @endsection

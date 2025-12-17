@@ -5,10 +5,15 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Data Fasilitas</h2>
-        <div>
-            <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah</a>
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Kembali</a>
-        </div>
+    </div>
+    
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <div class="mb-3 d-flex gap-2">
+        <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah Fasilitas</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Kembali</a>
     </div>
 
     <table class="table table-bordered align-middle">

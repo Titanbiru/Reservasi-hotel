@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Resepsionis;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 
@@ -34,7 +35,9 @@ class ReservationController extends Controller
     public function show($id)
     {
         $reservation = Reservation::with('roomType')->findOrFail($id);
-        return view('resepsionis.reservations.show', compact('reservation'));
+        $availableRooms = $reservation->roomType->rooms()->where('status','available')->get();
+
+        return view('resepsionis.reservations.show', compact('reservation', 'availableRooms'));
     }
     // Proses check-in
     public function confirm($id)
@@ -51,32 +54,53 @@ class ReservationController extends Controller
         return back()->with('success', 'Reservasi telah dikonfirmasi.');
     }
 
-    public function checkIn($id)
+    public function checkin(Request $request, $id)
+    {
+        
+        $request->validate([
+            'room_id' => 'required|exists:rooms,id'
+        ]);
+
+        
+        $reservation = Reservation::findOrFail($id);
+        $room = Room::findOrFail($request->room_id);
+        
+
+        // 1. Update reservasi
+        $reservation->update([
+            'status' => 'checked_in',
+            'room_id' => $room->id
+        ]);
+
+        // 2. Update kamar
+        $room->update([
+            'status' => 'occupied'
+        ]);
+
+        return redirect()->back()->with('success', 'Tamu berhasil check-in');
+    }
+
+
+    public function checkout($id)
     {
         $reservation = Reservation::findOrFail($id);
 
-        if ($reservation->status !== 'confirmed') {
-            return back()->with('error', 'Tamu belum dikonfirmasi.');
+        // 1. Pastikan reservasi punya kamar
+        if ($reservation->room_id) {
+
+            // 2. Kembalikan status kamar
+            Room::where('id', $reservation->room_id)
+                ->update(['status' => 'available']);
         }
 
-        $reservation->status = 'checked_in';
-        $reservation->save();
+        // 3. Update reservasi
+        $reservation->update([
+            'status' => 'check_out',
+            'room_id' => null // penting agar tidak nyangkut
+        ]);
 
-        return back()->with('success', 'Tamu berhasil check-in.');
+        return back()->with('success', 'Check-out berhasil');
     }
 
-    public function checkOut($id)
-    {
-        $reservation = Reservation::findOrFail($id);
-
-        if ($reservation->status !== 'checked_in') {
-            return back()->with('error', 'Tamu belum check-in.');
-        }
-
-        $reservation->status = 'check_out';
-        $reservation->save();
-
-        return back()->with('success', 'Tamu berhasil check-out.');
-    }
 
 }

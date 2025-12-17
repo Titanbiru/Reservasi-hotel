@@ -14,6 +14,12 @@ class Room extends Model
         'number',
         'status'
     ];
+    
+    public function reservation()
+    {
+        return $this->hasOne(Reservation::class);
+    }
+
 
     public function roomType()
     {

@@ -30,6 +30,14 @@
 
 <div class="print-container mt-3">
 
+@if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
     <h2 class="text-center mb-4">Bukti Reservasi Hotel</h2>
 
     <div class="mb-2"><span class="label">Kode Reservasi:</span> {{ $reservation->reservation_code }}</div>
@@ -43,18 +51,30 @@
     <div class="mb-2"><span class="label">Total Harga:</span>
         Rp {{ number_format($reservation->total_price, 0, ',', '.') }}
     </div>
-    <!-- <div class="text-center mb-3 back-btn">
-        </div> -->
-    <div class="text-center print-btn mt-4">
-        <a href="{{ route('reservation.create',$reservation->room_type_id) }}" class="btn btn-secondary">← Kembali</a>
-        
+    <div class="mb-2"><span class="label">Status Reservasi:</span> {{ ucfirst(str_replace('_', ' ', $reservation->status)) }}</div>    
+</div>
+<div class="text-center">
+    <div class=" print-btn mt-4 d-flex justify-content-center gap-2 mb-3">    
         <a href="{{ route('reservation.pdf', $reservation->reservation_code) }}" 
             class="btn btn-success">
             Download PDF
         </a>
         <a href="{{ route('reservation.history') }}" class="btn btn-primary">History Reservasi</a>
+        @if(in_array($reservation->status, ['pending','confirmed']))
+        <form action="{{ route('reservation.cancel', $reservation->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin membatalkan reservasi ini?')">
+            @csrf
+            @method('PATCH')
+            <button class="btn btn-danger">
+                Cancel Reservasi
+            </button>
+        </form>
+        @endif
     </div>
-
+    <div class="print-btn">
+        <a href="{{ route('reservation.create',$reservation->room_type_id) }}" class="btn btn-secondary px-4">Kembali</a>
+    </div>
 </div>
+
+
 
 @endsection

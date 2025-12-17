@@ -25,7 +25,7 @@
             <label>Status</label>
             <select name="status" class="form-control">
                 <option value="available">Available</option>
-                <option value="booked">Booked</option>
+                <option value="occupied">Occupied</option>
                 <option value="maintenance">Maintenance</option>
             </select>
         </div>

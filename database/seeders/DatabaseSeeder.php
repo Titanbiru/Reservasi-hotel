@@ -41,14 +41,14 @@ class DatabaseSeeder extends Seeder
             ->count(3)
             ->create()
             ->each(function ($roomType) {
-                // Setiap tipe kamar punya 3-5 kamar
-                Room::factory()->count(rand(3,5))
+                // Setiap tipe kamar punya 3-3 kamar
+                Room::factory()->count(rand(3,3))
                     ->for($roomType)
                     ->create();
             });
 
         // Reservations
-        Reservation::factory()->count(5)->create();
+        Reservation::factory()->count(2)->create();
 
     }
 }

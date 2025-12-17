@@ -23,7 +23,7 @@
         @endforelse
     </div>
     
-    <a href="{{ route('home') }}" class="btn btn-secondary m-3">← Kembali</a>
+    <a href="{{ route('home') }}" class="btn btn-secondary m-3">Kembali</a>
 
 </div>
 @endsection

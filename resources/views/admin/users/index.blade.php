@@ -4,13 +4,22 @@
 <div class="container mt-3">
 
     <h3>Manajemen User</h3>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    
     <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
     <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Kembali</a>
 
     <table class="table table-bordered">
-        <thead class="table-dark">
+        <thead>
             <tr>
-                <th>ID</th><th>Nama</th><th>Email</th><th>Role</th><th>Aksi</th>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 

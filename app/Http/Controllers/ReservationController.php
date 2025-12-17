@@ -93,4 +93,19 @@ class ReservationController extends Controller
 
         return $pdf->download('Bukti-Reservasi-'.$reservation->reservation_code.'.pdf');
     }
+
+    public function cancel(Reservation $reservation)
+    {
+        // Proteksi status
+        if (!in_array($reservation->status, ['pending', 'confirmed'])) {
+            return back()->with('error', 'Reservasi tidak dapat dibatalkan.');
+        }
+
+        $reservation->update([
+            'status' => 'cancelled'
+        ]);
+
+        return back()->with('success', 'Reservasi berhasil dibatalkan.');
+    }
+
 }

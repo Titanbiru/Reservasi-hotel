@@ -125,11 +125,15 @@
         justify-content:center;
         color: white;
         font-weight: bold;
-        text-shadow: 2px 4px 4px rgba(0,0,0,0.7);
     }
     
     .carousel-caption h2 {
         font-size: 2.5rem;
+        font-weight: bold;
+        text-shadow: 2px 4px 4px rgba(0,0,0,0.7);
+    }
+
+    .carousel-caption p {
         font-weight: bold;
         text-shadow: 2px 4px 4px rgba(0,0,0,0.7);
     }
